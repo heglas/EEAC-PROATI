@@ -57,7 +57,8 @@ bash
 cd ../frontend
 npm start
 🏗️ Estrutura do Projeto
-text
+
+
 proati-reservas/
 ├── backend/
 │   ├── app.py
@@ -80,6 +81,7 @@ proati-reservas/
 ├── config/
 │   └── config.py.template
 └── README.md
+
 🔒 Segurança
 Não armazene credenciais diretamente no código.
 

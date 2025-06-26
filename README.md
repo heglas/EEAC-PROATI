@@ -1,10 +1,10 @@
 PROATI Reservas
 Sistema web para agendamento e controle de recursos computacionais em ambientes educacionais.
 
-📌 Visão Geral
+Visão Geral
 O PROATI Reservas é uma aplicação web responsiva para gerenciar reservas de equipamentos como tablets, notebooks, netbooks e ultrabooks em escolas. O sistema integra dados entre uma planilha do Google Sheets e um banco de dados MySQL, garantindo redundância e facilitando o controle em tempo real.
 
-🚀 Funcionalidades Principais
+Funcionalidades Principais
 Listagem de equipamentos com status de disponibilidade
 
 Agendamento de reservas com validação de conflitos
@@ -15,7 +15,7 @@ Sincronização automática entre Google Sheets e MySQL
 
 Interface responsiva para desktop e mobile
 
-🛠️ Pré-requisitos
+Pré-requisitos
 Backend: Python 3.8+, Flask, MySQL
 
 Frontend: Node.js, React
@@ -24,7 +24,7 @@ Google Cloud para autenticação da API do Google Sheets (opcional)
 
 Hostinger ou outro serviço de hospedagem para banco de dados MySQL
 
-🚦 Instalação
+Instalação
 Clone o repositório:
 
 bash
@@ -56,9 +56,12 @@ Inicie o frontend:
 bash
 cd ../frontend
 npm start
-🏗️ Estrutura do Projeto
+
+Estrutura do Projeto
+
 ![Estrutura](https://proati.heglasmoreira.com.br/images/estrutura.png)
-🔒 Segurança
+
+Segurança
 Não armazene credenciais diretamente no código.
 
 Use HTTPS para comunicação entre frontend e backend.
@@ -67,7 +70,7 @@ Implemente autenticação (ex: JWT) conforme necessário.
 
 Valide e sanitize todas as entradas de usuário.
 
-🧩 Boas Práticas de Desenvolvimento
+Boas Práticas de Desenvolvimento
 Separação clara entre backend e frontend para facilitar manutenção e escalabilidade.
 
 Componentes React reutilizáveis para consistência e facilidade de atualização.
@@ -78,7 +81,7 @@ Sincronização automática de dados para garantir redundância e integridade.
 
 Documentação atualizada para facilitar onboarding de novos colaboradores.
 
-🔄 Contribuição
+Contribuição
 Siga as diretrizes abaixo para contribuir com o projeto:
 
 Faça um fork do repositório.
@@ -97,10 +100,10 @@ bash
 git push origin feature/minha-feature
 Abra um Pull Request.
 
-📄 Licença
+Licença
 Este projeto está licenciado sob a MIT License.
 
-📞 Contato
+Contato
 Para dúvidas ou sugestões, entre em contato com o time de desenvolvimento.
 
 Última atualização: 2025-06-26

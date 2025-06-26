@@ -57,29 +57,7 @@ bash
 cd ../frontend
 npm start
 🏗️ Estrutura do Projeto
-text
-proati-reservas/
-├── backend/
-│   ├── app.py
-│   ├── database.py
-│   ├── sync_logic.py
-│   ├── reservation_logic.py
-│   └── requirements.txt
-├── frontend/
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       │   ├── EquipmentList.jsx
-│       │   ├── ReservationForm.jsx
-│       │   └── Dashboard.jsx
-│       ├── App.js
-│       └── index.js
-├── scripts/
-│   ├── init_db.sql
-│   └── deploy.sh
-├── config/
-│   └── config.py.template
-└── README.md
+![Estrutura](https://proati.heglasmoreira.com.br/images/estrutura.png)
 🔒 Segurança
 Não armazene credenciais diretamente no código.
 

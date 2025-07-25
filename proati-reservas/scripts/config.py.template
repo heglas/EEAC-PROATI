@@ -1,0 +1,11 @@
+DB_CONFIG = {
+    'host': '127.0.0.1',              # Host local da VPS (se o MySQL estiver local na VPS)
+    'port': 3306,
+    'user': 'u688790493_proati',      # Usuário MySQL Hostinger
+    'password': 'SUA_SENHA',          # Insira aqui a senha que você definiu
+    'database': 'u688790493_proati'
+}
+
+GOOGLE_CREDS = {
+    # Insira aqui as credenciais JSON da conta de serviço do Google Sheets
+}

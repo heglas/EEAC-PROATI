@@ -2,5 +2,5 @@ proati-reservas/backend/config/config.py
 {
   "type": "service_account",
   "project_id": "agenda-digital-proati",
-  "private_key_id": "c0f8b2d3e4f5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQ...\n-----
+  "private_key_id": "...",
+  "private_key": "...\n-----

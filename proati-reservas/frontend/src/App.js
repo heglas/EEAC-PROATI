@@ -11,41 +11,43 @@ const theme = createTheme({
   palette: { mode: 'light' }
 });
 
+// Detecta o ambiente para definir o basename adequado
+const basename =
+  process.env.NODE_ENV === 'development' ? '/' : '/proati-reservas';
+
 function App() {
-  // Estado para armazenar o equipamento selecionado para reservar
   const [equipamentoSelecionado, setEquipamentoSelecionado] = useState(null);
 
-  // Callback enviado para EquipamentosList para controlar seleção
   const handleSelecionarEquipamento = (equip) => {
     setEquipamentoSelecionado(equip);
   };
 
-  // Callbacks para fechar o formulário reserva
   const handleCancelarReserva = () => {
     setEquipamentoSelecionado(null);
   };
 
   const handleSucessoReserva = () => {
     setEquipamentoSelecionado(null);
-    // Aqui você pode adicionar lógica extra, como atualizar lista ou mostrar mensagem
+    // Outras ações pós-reserva
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename={basename}>
         <NavBar />
         <Container maxWidth="md" sx={{ mt: 4 }}>
           <Suspense fallback={<div>Carregando...</div>}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              {/* Passa callback onSelecionar */}
-              <Route path="/equipamentos" element={<EquipamentosList onSelecionar={handleSelecionarEquipamento} />} />
-              {/* Não utilize essa rota para reserva, pois agora ReservaForm é renderizado condicionalmente */}
-              {/* <Route path="/reservar" element={<ReservaForm />} /> */}
+              <Route
+                path="/equipamentos"
+                element={
+                  <EquipamentosList onSelecionar={handleSelecionarEquipamento} />
+                }
+              />
             </Routes>
 
-            {/* Renderiza formulário de reserva ao selecionar equipamento */}
             {equipamentoSelecionado && (
               <ReservaForm
                 equipamento={equipamentoSelecionado}

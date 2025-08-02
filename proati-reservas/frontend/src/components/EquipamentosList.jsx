@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchEquipamentos } from "../api";
 import {
-  Card, CardContent, CardActions, Button, Typography, CircularProgress, Grid, Alert
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  CircularProgress,
+  Grid,
+  Alert,
 } from "@mui/material";
 
-function EquipamentosList({ onSelecionar }) {
+function EquipamentosList({ onSelecionar = () => {} }) {
   const [equipamentos, setEquipamentos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
@@ -23,7 +30,8 @@ function EquipamentosList({ onSelecionar }) {
 
   if (loading) return <CircularProgress sx={{ m: 4 }} />;
   if (erro) return <Alert severity="error">{erro}</Alert>;
-  if (equipamentos.length === 0) return <Alert severity="info">Nenhum equipamento encontrado.</Alert>;
+  if (equipamentos.length === 0)
+    return <Alert severity="info">Nenhum equipamento encontrado.</Alert>;
 
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
@@ -31,12 +39,22 @@ function EquipamentosList({ onSelecionar }) {
         <Grid item xs={12} md={6} lg={4} key={eq.id}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{eq.tipo} — {eq.modelo}</Typography>
-              <Typography color="text.secondary">{eq.marca} ({eq.identificador})</Typography>
-              <Typography sx={{ mt: 1 }}>Disponíveis: {eq.disponiveis} | Ativos: {eq.ativo}</Typography>
+              <Typography variant="h6">
+                {eq.tipo} — {eq.modelo}
+              </Typography>
+              <Typography color="text.secondary">
+                {eq.marca} ({eq.identificador})
+              </Typography>
+              <Typography sx={{ mt: 1 }}>
+                Disponíveis: {eq.disponiveis} | Ativos: {eq.ativo}
+              </Typography>
             </CardContent>
             <CardActions>
-              <Button variant="contained" size="small" onClick={() => onSelecionar(eq)}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() => onSelecionar(eq)}
+              >
                 Reservar
               </Button>
             </CardActions>

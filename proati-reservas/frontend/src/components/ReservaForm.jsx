@@ -11,17 +11,27 @@ import {
 } from "@mui/material";
 
 function ReservaForm({ equipamento, onSucesso, onCancelar }) {
+  // Proteção: se equipamento não definido
+  if (!equipamento) {
+    return (
+      <Box sx={{ p: 3, textAlign: "center" }}>
+        <Typography variant="h6" color="text.secondary">
+          Selecione um equipamento para reservar.
+        </Typography>
+      </Box>
+    );
+  }
+
   const [usuario, setUsuario] = useState("");
   const [inicio, setInicio] = useState("");
   const [fim, setFim] = useState("");
-  const [selectedUnits, setSelectedUnits] = useState([]); // Array para múltiplas seleções
+  const [selectedUnits, setSelectedUnits] = useState([]); // seleção múltipla
   const [erro, setErro] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Total de unidades disponíveis do equipamento
-  const unidadesDisponiveis = equipamento?.disponiveis || 0;
+  const unidadesDisponiveis = equipamento.disponiveis || 0;
 
-  // Função que alterna (add/remove) uma unidade do array de selecionadas
+  // Alterna seleção da unidade (toggle)
   const toggleUnit = (unitNumber) => {
     if (selectedUnits.includes(unitNumber)) {
       setSelectedUnits(selectedUnits.filter((u) => u !== unitNumber));
@@ -42,13 +52,12 @@ function ReservaForm({ equipamento, onSucesso, onCancelar }) {
     setLoading(true);
 
     try {
-      // Envia array de unidades selecionadas na reserva
       await reservarEquipamento({
         equipamento_id: equipamento.id,
         usuario,
         inicio,
         fim,
-        unidades: selectedUnits, // array enviado
+        unidades: selectedUnits, // Array das unidades selecionadas
       });
       setLoading(false);
       onSucesso();
@@ -108,7 +117,7 @@ function ReservaForm({ equipamento, onSucesso, onCancelar }) {
       />
 
       <Typography sx={{ mt: 3, mb: 1, fontWeight: "bold" }}>
-        Selecione os números do equipamento a reservar:
+        Selecione os números dos equipamentos que deseja reservar:
       </Typography>
 
       <Grid container spacing={1} justifyContent="center">

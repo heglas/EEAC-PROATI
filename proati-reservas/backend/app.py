@@ -1,42 +1,26 @@
-from flask import Flask, jsonify, request
-from database import mysql_connection
-from sync_logic import sync_equipamentos
-from reservation_logic import verificar_disponibilidade
+from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
 
-@app.route('/equipamentos', methods=['GET'])
-def get_equipamentos():
-    conn = mysql_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM equipamentos")
-    result = cursor.fetchall()
-    conn.close()
-    return jsonify(result)
+# Configurando CORS permitindo origens específicas (frontend local e IP da VPS)
+CORS(app, resources={r"/*": {"origins": [
+    "http://localhost:3000",        # frontend rodando localmente (dev)
+    "http://194.5.159.164",         # frontend hospedado acessando backend
+    "http://194.5.159.164:8000"     # se frontend na mesma porta backend
+]}})
 
-@app.route('/reservar', methods=['POST'])
-def criar_reserva():
-    data = request.json
-    disponivel = verificar_disponibilidade(
-        data['equipamento_id'], data['inicio'], data['fim']
-    )
-    if disponivel:
-        conn = mysql_connection()
-        cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO reservas (equipamento_id, usuario, data_inicio, data_fim, finalidade)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (data['equipamento_id'], data['usuario'], data['inicio'], data['fim'], data.get('finalidade', '')))
-        conn.commit()
-        conn.close()
-        return jsonify({"status": "success"})
-    else:
-        return jsonify({"status": "error", "message": "Conflito de reserva"}), 400
+# Suas outras configurações e rotas aqui
 
-@app.route('/sync', methods=['POST'])
-def sincronizar():
-    sync_equipamentos()
-    return jsonify({"status": "sincronizado"})
+@app.route('/equipamentos')
+def equipamentos():
+    # Exemplo simples, substitua pela sua implementação real
+    return {
+        "message": "Lista de equipamentos"
+        # seu código real que retorna a lista dos equipamentos
+    }
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+# Outras rotas ...
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)

@@ -1,35 +1,32 @@
-import React, { useState } from "react";
-import EquipamentosList from "./components/EquipamentosList";
-import ReservaForm from "./components/ReservaForm";
+import React, { Suspense } from 'react';
+import { ThemeProvider, createTheme, CssBaseline, Container } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Dashboard from './components/Dashboard';
+import EquipamentosList from './components/EquipamentosList';
+import ReservaForm from './components/ReservaForm';
+
+const theme = createTheme({
+  palette: { mode: 'light' }
+});
 
 function App() {
-  const [equipamentoSelecionado, setEquipamentoSelecionado] = useState(null);
-  const [sucessoReserva, setSucessoReserva] = useState(false);
-
-  const handleSelecionar = (eq) => {
-    setEquipamentoSelecionado(eq);
-    setSucessoReserva(false);
-  };
-
-  const handleReservaSucesso = () => {
-    setSucessoReserva(true);
-    setEquipamentoSelecionado(null);
-  };
-
-  const handleCancelar = () => {
-    setEquipamentoSelecionado(null);
-  };
-
   return (
-    <div>
-      <h1>Proati Reservas</h1>
-      {sucessoReserva && <p style={{ color: "green" }}>Reserva efetuada com sucesso!</p>}
-      {!equipamentoSelecionado ? (
-        <EquipamentosList onSelecionar={handleSelecionar} />
-      ) : (
-        <ReservaForm equipamento={equipamentoSelecionado} onSucesso={handleReservaSucesso} onCancelar={handleCancelar} />
-      )}
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <NavBar />
+        <Container maxWidth="md">
+          <Suspense fallback={<div>Carregando...</div>}>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/equipamentos" element={<EquipamentosList />} />
+              <Route path="/reservar" element={<ReservaForm />} />
+            </Routes>
+          </Suspense>
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
 }
 

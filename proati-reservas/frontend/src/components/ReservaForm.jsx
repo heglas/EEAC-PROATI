@@ -11,7 +11,14 @@ import {
 } from "@mui/material";
 
 function ReservaForm({ equipamento, onSucesso, onCancelar }) {
-  // Proteção: se equipamento não definido
+  // Hooks sempre declarados no topo
+  const [usuario, setUsuario] = useState("");
+  const [inicio, setInicio] = useState("");
+  const [fim, setFim] = useState("");
+  const [selectedUnits, setSelectedUnits] = useState([]); // seleção múltipla
+  const [erro, setErro] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   if (!equipamento) {
     return (
       <Box sx={{ p: 3, textAlign: "center" }}>
@@ -21,13 +28,6 @@ function ReservaForm({ equipamento, onSucesso, onCancelar }) {
       </Box>
     );
   }
-
-  const [usuario, setUsuario] = useState("");
-  const [inicio, setInicio] = useState("");
-  const [fim, setFim] = useState("");
-  const [selectedUnits, setSelectedUnits] = useState([]); // seleção múltipla
-  const [erro, setErro] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const unidadesDisponiveis = equipamento.disponiveis || 0;
 
@@ -40,6 +40,7 @@ function ReservaForm({ equipamento, onSucesso, onCancelar }) {
     }
   };
 
+  // Envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro(null);

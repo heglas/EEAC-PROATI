@@ -7,11 +7,13 @@ import Dashboard from './components/Dashboard';
 import EquipamentosList from './components/EquipamentosList';
 import ReservaForm from './components/ReservaForm';
 
+
+
 const theme = createTheme({
   palette: { mode: 'light' }
 });
 
-// Detecta o ambiente para definir o basename adequado
+// Força o basename para produção no subdiretório correto
 const basename =
   process.env.NODE_ENV === 'development' ? '/' : '/proati-reservas';
 
@@ -28,7 +30,7 @@ function App() {
 
   const handleSucessoReserva = () => {
     setEquipamentoSelecionado(null);
-    // Outras ações pós-reserva
+    // Adicione outras ações pós-reserva se desejar
   };
 
   return (

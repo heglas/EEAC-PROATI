@@ -1,7 +1,9 @@
-// Força sempre o endereço do VPS para produção (HTTPS com domínio configurado)
-const API_BASE_URL = "https://api.heglasmoreira.com.br";
+// Defina o endereço base da API com variável de ambiente suportando fallback para IP
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://194.5.159.164:8000";
 
-// Função para buscar a lista de equipamentos na API
+/**
+ * Busca a lista de equipamentos do backend
+ */
 export async function fetchEquipamentos() {
   const response = await fetch(`${API_BASE_URL}/equipamentos`);
   if (!response.ok) {
@@ -10,7 +12,10 @@ export async function fetchEquipamentos() {
   return response.json();
 }
 
-// Função para enviar os dados da reserva para a API
+/**
+ * Envia os dados para reservar um equipamento
+ * @param {Object} dadosReserva Objeto com dados da reserva
+ */
 export async function reservarEquipamento(dadosReserva) {
   const response = await fetch(`${API_BASE_URL}/reservar`, {
     method: "POST",

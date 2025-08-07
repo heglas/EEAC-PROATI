@@ -28,33 +28,28 @@ function EquipamentosList({ onSelecionar = () => {} }) {
       });
   }, []);
 
-  if (loading) return <CircularProgress sx={{ m: 4 }} />;
+  if (loading) return <CircularProgress />;
   if (erro) return <Alert severity="error">{erro}</Alert>;
-  if (equipamentos.length === 0)
-    return <Alert severity="info">Nenhum equipamento encontrado.</Alert>;
+  if (equipamentos.length === 0) return <Typography>Nenhum equipamento encontrado.</Typography>;
 
   return (
-    <Grid container spacing={2} sx={{ p: 2 }}>
+    <Grid container spacing={2}>
       {equipamentos.map((eq) => (
-        <Grid item xs={12} md={6} lg={4} key={eq.id}>
+        <Grid item xs={12} sm={6} md={4} key={eq.id}>
           <Card>
             <CardContent>
-              <Typography variant="h6">
+              <Typography variant="h6" component="div">
                 {eq.tipo} — {eq.modelo}
               </Typography>
               <Typography color="text.secondary">
                 {eq.marca} ({eq.identificador})
               </Typography>
-              <Typography sx={{ mt: 1 }}>
-                Disponíveis: {eq.disponiveis} | Ativos: {eq.ativo}
+              <Typography variant="body2" color="text.secondary">
+                Disponíveis: {eq.disponiveis} | Ativos: {eq.ativo ? "Sim" : "Não"}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                variant="contained"
-                size="small"
-                onClick={() => onSelecionar(eq)}
-              >
+              <Button size="small" onClick={() => onSelecionar(eq)}>
                 Reservar
               </Button>
             </CardActions>

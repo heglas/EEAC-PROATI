@@ -24,3 +24,12 @@ export async function reservarEquipamento(dadosReserva) {
   }
   return response.json();
 }
+
+// Função para buscar as reservas do backend
+export async function fetchReservas() {
+  const response = await fetch(`${API_BASE_URL}/reservas`);
+  if (!response.ok) {
+    throw new Error(`Erro ao buscar reservas: ${response.statusText}`);
+  }
+  return response.json();
+}
